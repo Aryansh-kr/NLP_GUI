@@ -8,177 +8,243 @@ class NLPApp:
     def __init__(self):
 
         #create db object
-        self.dbo= Database()
+        self.dbo = Database()
         self.apio = API()
 
-        #login ka hui load karna
-        self.root=Tk()
+        # Initialize main window
+        self.root = Tk()
         self.root.title("NLPApp")
-        #to add top left icon-self.root.iconbitmap("<pathof fevicon>")
-        self.root.geometry("350x600")
-        self.root.configure(bg="pink")#we can also use hex-code inplace of name of color
+        self.root.geometry("400x650")
+        self.root.configure(bg="#f0f0f0")
 
         self.login_gui()
 
         self.root.mainloop()
 
     def login_gui(self):
-        self.clear()#use it remove existing gui
+        self.clear()
 
-        heading = Label(self.root,text="NLPApp",bg='pink',fg='white')
-        heading.pack(pady=(30,30))
-        heading.configure(font=('verdana',24,'bold'))
+        frame = Frame(self.root, bg="#f0f0f0")
+        frame.pack(expand=True)
 
-        label1= Label(self.root,text='Enter Email')
-        label1.pack(pady=(10,10))
+        heading = Label(frame, text="NLPApp", bg='#f0f0f0', fg='#333', font=('verdana', 24, 'bold'))
+        heading.pack(pady=(30, 10))
 
-        self.email_input = Entry(self.root,width=50)
-        self.email_input.pack(pady=(5,10),ipady=4)
+        label1 = Label(frame, text='Enter Email', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label1.pack(pady=(10, 5))
+        
+        self.email_input = Entry(frame, width=40)
+        self.email_input.pack(pady=(5, 10), ipady=4)
 
-        label2= Label(self.root,text='Enter Password')
-        label2.pack(pady=(10,10))
+        label2 = Label(frame, text='Enter Password', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label2.pack(pady=(10, 5))
+        
+        self.password_input = Entry(frame, width=40, show='*')
+        self.password_input.pack(pady=(5, 10), ipady=4)
 
-        self.password_input = Entry(self.root,width=50,show='*')
-        self.password_input.pack(pady=(5,10),ipady=4)
+        login_btn = Button(frame, text='Login', width=30, height=2, bg="#4caf50", fg="white", command=self.perform_login)
+        login_btn.pack(pady=(10, 10))
 
-        login_btn = Button(self.root,text='Login',width=30,height=2,command=self.perform_login)
-        login_btn.pack(pady=(10,10))
+        label3 = Label(frame, text='Not a member?', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label3.pack(pady=(20, 10))
 
-        label3= Label(self.root,text='Not a member?')
-        label3.pack(pady=(20,10))
-
-        redirect_btn = Button(self.root,text='Register Now',command=self.register_gui)
-        redirect_btn.pack(pady=(10,10))
+        redirect_btn = Button(frame, text='Register Now', bg="#2196f3", fg="white", command=self.register_gui)
+        redirect_btn.pack(pady=(10, 10))
 
     def register_gui(self):
         self.clear()
 
-        heading = Label(self.root,text="NLPApp",bg='pink',fg='white')
-        heading.pack(pady=(30,30))
-        heading.configure(font=('verdana',24,'bold'))
+        frame = Frame(self.root, bg="#f0f0f0")
+        frame.pack(expand=True)
 
-        label0= Label(self.root,text='Enter Name')
-        label0.pack(pady=(10,10))
+        heading = Label(frame, text="NLPApp", bg='#f0f0f0', fg='#333', font=('verdana', 24, 'bold'))
+        heading.pack(pady=(30, 10))
 
-        self.name_input = Entry(self.root,width=50)
-        self.name_input.pack(pady=(5,10),ipady=4)
+        label0 = Label(frame, text='Enter Name', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label0.pack(pady=(10, 5))
+        
+        self.name_input = Entry(frame, width=40)
+        self.name_input.pack(pady=(5, 10), ipady=4)
 
+        label1 = Label(frame, text='Enter Email', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label1.pack(pady=(10, 5))
+        
+        self.email_input = Entry(frame, width=40)
+        self.email_input.pack(pady=(5, 10), ipady=4)
 
-        label1= Label(self.root,text='Enter Email')
-        label1.pack(pady=(10,10))
+        label2 = Label(frame, text='Enter Password', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label2.pack(pady=(10, 5))
+        
+        self.password_input = Entry(frame, width=40, show='*')
+        self.password_input.pack(pady=(5, 10), ipady=4)
 
-        self.email_input = Entry(self.root,width=50)
-        self.email_input.pack(pady=(5,10),ipady=4)
+        registration_btn = Button(frame, text='Register', width=30, height=2, bg="#4caf50", fg="white", command=self.perform_registration)
+        registration_btn.pack(pady=(10, 10))
 
-        label2= Label(self.root,text='Enter Password')
-        label2.pack(pady=(10,10))
+        label3 = Label(frame, text='Already a member?', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label3.pack(pady=(20, 10))
 
-        self.password_input = Entry(self.root,width=50,show='*')
-        self.password_input.pack(pady=(5,10),ipady=4)
-
-        registration_btn = Button(self.root,text='Register',width=30,height=2,command=self.perform_registration)
-        registration_btn.pack(pady=(10,10))
-
-        label3= Label(self.root,text='Already a member?')
-        label3.pack(pady=(20,10))
-
-        redirect_btn = Button(self.root,text='Login Now',command=self.login_gui)
-        redirect_btn.pack(pady=(10,10))
-
+        redirect_btn = Button(frame, text='Login Now', bg="#2196f3", fg="white", command=self.login_gui)
+        redirect_btn.pack(pady=(10, 10))
 
     def clear(self):
-        #clear the existing gui
-        for i in self.root.pack_slaves():
-            i.destroy()
+        for widget in self.root.winfo_children():
+            widget.destroy()
 
     def perform_registration(self):
-        #fetch data from the gui
-        name=self.name_input.get()
-        email=self.email_input.get()
-        password=self.password_input.get()
-    
-        response = self.dbo.add_data(name,email,password)
+        name = self.name_input.get()
+        email = self.email_input.get()
+        password = self.password_input.get()
+
+        response = self.dbo.add_data(name, email, password)
 
         if response:
-            messagebox.showinfo('Success','Registration siuccessful.You can login now')
+            messagebox.showinfo('Success', 'Registration successful. You can login now.')
         else:
-            messagebox.showerror('Error','Email already exists')
+            messagebox.showerror('Error', 'Email already exists.')
 
     def perform_login(self):
+        email = self.email_input.get()
+        password = self.password_input.get()
 
-        email=self.email_input.get()
-        password=self.password_input.get()
+        response = self.dbo.search(email, password)
 
-        response = self.dbo.search(email,password)
-        
         if response:
-            messagebox.showinfo('success','Login successful')
+            messagebox.showinfo('Success', 'Login successful.')
             self.home_gui()
         else:
-            messagebox.showerror('error','Incorrect Email/Password')
-
-
+            messagebox.showerror('Error', 'Incorrect Email/Password.')
 
     def home_gui(self):
-
         self.clear()
 
-        heading = Label(self.root,text="NLPApp",bg='pink',fg='white')
-        heading.pack(pady=(30,30))
-        heading.configure(font=('verdana',24,'bold'))
+        frame = Frame(self.root, bg="#f0f0f0")
+        frame.pack(expand=True)
 
-        sentiment_btn = Button(self.root,text='Sentiment Analysis',width=30,height=2,command=self.sentiment_gui)
-        sentiment_btn.pack(pady=(10,10))
+        heading = Label(frame, text="NLPApp", bg='#f0f0f0', fg='#333', font=('verdana', 24, 'bold'))
+        heading.pack(pady=(30, 10))
 
-        ner_btn = Button(self.root,text='Name Entity Recognition',width=30,height=2,command=self.perform_registration)
-        ner_btn.pack(pady=(10,10))
+        sentiment_btn = Button(frame, text='Sentiment Analysis', width=30, height=2, bg="#4caf50", fg="white", command=self.sentiment_gui)
+        sentiment_btn.pack(pady=(10, 10))
 
-        emotion_btn = Button(self.root,text='Emotion Prediction',width=30,height=2,command=self.perform_registration)
-        emotion_btn.pack(pady=(10,10))
+        ner_btn = Button(frame, text='Name Entity Recognition', width=30, height=2, bg="#4caf50", fg="white", command=self.ner_gui)
+        ner_btn.pack(pady=(10, 10))
 
-        logout_btn = Button(self.root,text='Logout',command=self.login_gui)
-        logout_btn.pack(pady=(10,10))
+        emotion_btn = Button(frame, text='Emotion Prediction', width=30, height=2, bg="#4caf50", fg="white", command=self.emotion_gui)
+        emotion_btn.pack(pady=(10, 10))
 
+        logout_btn = Button(frame, text='Logout', width=30, height=2, bg="#f44336", fg="white", command=self.login_gui)
+        logout_btn.pack(pady=(10, 10))
 
     def sentiment_gui(self):
         self.clear()
 
-        heading = Label(self.root,text="NLPApp",bg='pink',fg='white')
-        heading.pack(pady=(30,30))
-        heading.configure(font=('verdana',24,'bold'))
+        frame = Frame(self.root, bg="#f0f0f0")
+        frame.pack(expand=True)
 
-        heading2 = Label(self.root,text="Sentiment Analysis",bg='pink',fg='white')
-        heading2.pack(pady=(10,20))
-        heading2.configure(font=('verdana',20))
+        heading = Label(frame, text="NLPApp", bg='#f0f0f0', fg='#333', font=('verdana', 24, 'bold'))
+        heading.pack(pady=(30, 10))
 
-        label1= Label(self.root,text='Enter the text')
-        label1.pack(pady=(10,10))
+        heading2 = Label(frame, text="Sentiment Analysis", bg='#f0f0f0', fg='#333', font=('verdana', 20))
+        heading2.pack(pady=(10, 10))
 
-        self.sentiment_input = Entry(self.root,width=50)
-        self.sentiment_input.pack(pady=(5,10),ipady=4)
+        label1 = Label(frame, text='Enter the text', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label1.pack(pady=(10, 5))
+        
+        self.sentiment_input = Entry(frame, width=40)
+        self.sentiment_input.pack(pady=(5, 10), ipady=4)
 
-        sentiment_btn = Button(self.root,text='Analyse Sentiment',command=self.do_sentiment_analysis)
-        sentiment_btn.pack(pady=(10,10))
+        sentiment_btn = Button(frame, text='Analyze Sentiment', width=30, height=2, bg="#4caf50", fg="white", command=self.do_sentiment_analysis)
+        sentiment_btn.pack(pady=(10, 10))
 
-        self.sentiment_result = Label(self.root, text='',bg='pink',fg='white')
+        self.sentiment_result = Label(frame, text='', bg='#f0f0f0', fg='#333', font=('verdana', 16))
         self.sentiment_result.pack(pady=(10, 10))
-        self.sentiment_result.configure(font=('verdana', 16))
 
-        goback_btn = Button(self.root,text='Go Back',command=self.home_gui)
-        goback_btn.pack(pady=(10,10))
-    
-    
+        goback_btn = Button(frame, text='Go Back', width=30, height=2, bg="#2196f3", fg="white", command=self.home_gui)
+        goback_btn.pack(pady=(10, 10))
+
     def do_sentiment_analysis(self):
-
         text = self.sentiment_input.get()
         result = self.apio.sentiment_analysis(text)
 
         txt = ''
-        for i in result['sentiment']:
-            txt = txt + i + ' -> ' + str(result['sentiment'][i]) + '\n'
+        for sentiment, score in result['sentiment'].items():
+            txt += f'{sentiment} -> {score}\n'
 
-        print(txt)
         self.sentiment_result['text'] = txt
 
+    def ner_gui(self):
+        self.clear()
 
-nlp=NLPApp()
+        frame = Frame(self.root, bg="#f0f0f0")
+        frame.pack(expand=True)
+
+        heading = Label(frame, text="NLPApp", bg='#f0f0f0', fg='#333', font=('verdana', 24, 'bold'))
+        heading.pack(pady=(30, 10))
+
+        heading2 = Label(frame, text="Name Entity Recognition", bg='#f0f0f0', fg='#333', font=('verdana', 20))
+        heading2.pack(pady=(10, 10))
+
+        label1 = Label(frame, text='Enter the text', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label1.pack(pady=(10, 5))
+        
+        self.ner_input = Entry(frame, width=40)
+        self.ner_input.pack(pady=(5, 10), ipady=4)
+
+        ner_btn = Button(frame, text='Analyze Text', width=30, height=2, bg="#4caf50", fg="white", command=self.do_ner_analysis)
+        ner_btn.pack(pady=(10, 10))
+
+        self.ner_result = Label(frame, text='', bg='#f0f0f0', fg='#333', font=('verdana', 16))
+        self.ner_result.pack(pady=(10, 10))
+
+        goback_btn = Button(frame, text='Go Back', width=30, height=2, bg="#2196f3", fg="white", command=self.home_gui)
+        goback_btn.pack(pady=(10, 10))
+
+    def do_ner_analysis(self):
+        text = self.ner_input.get()
+        result = self.apio.ner(text)
+
+        txt = ''
+        for entity, label in result['entities']:
+            txt += f'{entity} -> {label}\n'
+
+        self.ner_result['text'] = txt
+
+    def emotion_gui(self):
+        self.clear()
+
+        frame = Frame(self.root, bg="#f0f0f0")
+        frame.pack(expand=True)
+
+        heading = Label(frame, text="NLPApp", bg='#f0f0f0', fg='#333', font=('verdana', 24, 'bold'))
+        heading.pack(pady=(30, 10))
+
+        heading2 = Label(frame, text="Emotion Prediction", bg='#f0f0f0', fg='#333', font=('verdana', 20))
+        heading2.pack(pady=(10, 10))
+
+        label1 = Label(frame, text='Enter the text', bg='#f0f0f0', fg='#333', font=('verdana', 10))
+        label1.pack(pady=(10, 5))
+        
+        self.emotion_input = Entry(frame, width=40)
+        self.emotion_input.pack(pady=(5, 10), ipady=4)
+
+        emotion_btn = Button(frame, text='Analyze Text', width=30, height=2, bg="#4caf50", fg="white", command=self.do_emotion_analysis)
+        emotion_btn.pack(pady=(10, 10))
+
+        self.emotion_result = Label(frame, text='', bg='#f0f0f0', fg='#333', font=('verdana', 16))
+        self.emotion_result.pack(pady=(10, 10))
+
+        goback_btn = Button(frame, text='Go Back', width=30, height=2, bg="#2196f3", fg="white", command=self.home_gui)
+        goback_btn.pack(pady=(10, 10))
+
+    def do_emotion_analysis(self):
+        text = self.emotion_input.get()
+        result = self.apio.emotion_prediction(text)
+
+        txt = ''
+        for emotion, score in result['emotions'].items():
+            txt += f'{emotion} -> {score}\n'
+
+        self.emotion_result['text'] = txt
+
+nlp = NLPApp()
