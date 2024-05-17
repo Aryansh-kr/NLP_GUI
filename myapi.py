@@ -11,7 +11,9 @@ class API:
         return response
 
     def ner(self,text):
-        paralleldots.ner(text)
+        response=paralleldots.ner(text)
+        return response
 
     def emotion_prediction(self,text):
-        paralleldots.emotion(text)
+        response=paralleldots.emotion(text)
+        return response
